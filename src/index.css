@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+  padding: 0;
+  margin: 0;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+:root {
+  --primaryColor: white;
+  --primaryBackground: #e3e6e6;
+  --secondaryColor: rgb(197, 224, 247);
+}
+
+body {
+  min-height: 100vh;
+  padding: 16px;
+  background-color: var(--primaryBackground);
+}
+
+.heading {
+  text-align: center;
+  background-color: var(--primaryColor);
+  margin-bottom: 16px;
+}
+
+button {
+  background-color: var(--primaryColor);
+  border: none;
+  padding-block: 16px;
+  width: 100%;
+  color: white;
+  background-color: aqua;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.body {
+  padding-bottom: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* flex-direction: row; */
+  gap: 16px;
+  /* grid-template-rows: 1fr; */
+}
+
+.cover-all {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primaryColor);
+}
+
+#predictions {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10vh;
+}
+
+#scratch-pad {
+  height: 500px;
+  width: 100%;
+  background-color: var(--primaryColor);
+}
+
+#button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

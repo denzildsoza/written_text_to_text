@@ -1,9 +1,23 @@
 import * as ort from "onnxruntime-web";
 
 function softmax(arr) {
-  return arr.map(function(value,index) { 
-    return Math.exp(value) / arr.map( function(y /*value*/){ return Math.exp(y) } ).reduce( function(a,b){ return a+b })
-  })
+  return arr.map(function (value, index) {
+    return (
+      Math.exp(value) /
+      arr
+        .map(function (y /*value*/) {
+          return Math.exp(y);
+        })
+        .reduce(function (a, b) {
+          return a + b;
+        })
+    );
+  });
+}
+
+function findMaxIndex(arr) {
+  const maxValue = Math.max(...arr);
+  return arr.indexOf(maxValue);
 }
 
 const reduceFlatten = (array) => {
@@ -15,7 +29,6 @@ const reduceFlatten = (array) => {
 export const changeArrayToTensor = (array) => {
   const flatArray = reduceFlatten(array);
   const data = Float32Array.from(flatArray);
-
   const tensor = new ort.Tensor("float32", data, [1, 1, 28, 28]);
   return tensor;
 };
@@ -23,5 +36,5 @@ export const changeArrayToTensor = (array) => {
 export async function runSqueezenetModel(preprocessedData) {
   const session = await ort.InferenceSession.create("./recognizeNumbers.onnx");
   const result = await session.run({ input: preprocessedData });
-  return softmax(result["24"].cpuData)
+  return findMaxIndex(result["24"].cpuData).toString();
 }
